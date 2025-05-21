@@ -46,18 +46,11 @@
 
 #define MAX_NUM_CHANNELS MAX_NUM_DATA_STREAMS_USB3 * 35 + 16
 
-namespace RhythmNode
+namespace IntanUSB
 {
 
 	class Headstage;
 	class ImpedanceMeter;
-
-	enum BoardType
-	{
-		ACQUISITION_BOARD,
-		INTAN_RHD_USB,
-		RHD_RECORDING_CONTROLLER
-	};
 
 	enum ChannelNamingScheme
 	{
@@ -85,7 +78,7 @@ namespace RhythmNode
 
 	public:
 		/** Constructor; must specify the type of board used */
-		DeviceThread(SourceNode* sn, BoardType boardType);
+		DeviceThread(SourceNode* sn);
 
 		/** Destructor */
 		~DeviceThread();
@@ -123,7 +116,7 @@ namespace RhythmNode
 		ChannelNamingScheme getNamingScheme();
 
 		/** Allow the thread to respond to messages sent by other plugins */
-		void handleBroadcastMessage(String msg) override;
+		void handleBroadcastMessage (const String& msg, const int64 messageTimeMilliseconds) override;
 
 		/** Informs the DataThread about whether to expect saved settings to be loaded*/
 		void initialize(bool signalChainIsLoading) override;
@@ -213,8 +206,6 @@ namespace RhythmNode
 
 		static DataThread* createDataThread(SourceNode* sn);
 
-		static BoardType boardType;
-
 		class DigitalOutputTimer : public Timer
 		{
 		public:
@@ -257,14 +248,14 @@ namespace RhythmNode
 		void setCableLength(int hsNum, float length);
 
 		/** Rhythm API classes*/
-		ScopedPointer<Rhd2000EvalBoard> evalBoard;
+		std::unique_ptr<Rhd2000EvalBoard> evalBoard;
 		Rhd2000Registers chipRegisters;
-		ScopedPointer<Rhd2000DataBlock> dataBlock;
+		std::unique_ptr<Rhd2000DataBlock> dataBlock;
 		Array<Rhd2000EvalBoard::BoardDataSource> enabledStreams;
 
 		/** Custom classes*/
 		OwnedArray<Headstage> headstages;
-		ScopedPointer<ImpedanceMeter> impedanceThread;
+		std::unique_ptr<ImpedanceMeter> impedanceThread;
 
 		/** True if device is available*/
 		bool deviceFound;

@@ -38,7 +38,7 @@
 
 #include "DeviceThread.h"
 
-namespace RhythmNode
+namespace IntanUSB
 {
 
 	class ImpedanceMeter : public ThreadWithProgressWindow

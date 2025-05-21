@@ -26,7 +26,7 @@
 
 #include "DeviceThread.h"
 
-namespace RhythmNode
+namespace IntanUSB
 {
 
     /**
@@ -41,7 +41,7 @@ namespace RhythmNode
     {
     public:
 
-        IntanUSBInterface(SourceNode* sn) : DeviceThread(sn, INTAN_RHD_USB) { }
+        IntanUSBInterface(SourceNode* sn) : DeviceThread(sn) { }
 
         ~IntanUSBInterface() { }
     };

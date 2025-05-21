@@ -23,7 +23,7 @@
 
 #include "ImpedanceMeter.h"
 
-using namespace RhythmNode;
+using namespace IntanUSB;
 
 #define PI  3.14159265359
 #define TWO_PI  6.28318530718
@@ -341,18 +341,6 @@ void ImpedanceMeter::runImpedanceMeasurement(Impedances& impedances)
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortD,
         Rhd2000EvalBoard::AuxCmd1, 1);
 
-    if (board->boardType == RHD_RECORDING_CONTROLLER)
-    {
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortE,
-            Rhd2000EvalBoard::AuxCmd1, 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortF,
-            Rhd2000EvalBoard::AuxCmd1, 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortG,
-            Rhd2000EvalBoard::AuxCmd1, 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortH,
-            Rhd2000EvalBoard::AuxCmd1, 1);
-    }
-
     // Select number of periods to measure impedance over
     int numPeriods = (0.020 * actualImpedanceFreq); // Test each channel for at least 20 msec...
     if (numPeriods < 5) numPeriods = 5; // ...but always measure across no fewer than 5 complete periods
@@ -376,14 +364,6 @@ void ImpedanceMeter::runImpedanceMeasurement(Impedances& impedances)
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortB, Rhd2000EvalBoard::AuxCmd3, 3);
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortC, Rhd2000EvalBoard::AuxCmd3, 3);
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortD, Rhd2000EvalBoard::AuxCmd3, 3);
-
-    if (board->boardType == RHD_RECORDING_CONTROLLER)
-    {
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortE, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortF, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortG, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortH, Rhd2000EvalBoard::AuxCmd3, 3);
-    }
 
     CHECK_EXIT;
     board->evalBoard->setContinuousRunMode(false);
@@ -600,14 +580,6 @@ void ImpedanceMeter::restoreBoardSettings()
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortC, Rhd2000EvalBoard::AuxCmd1, 0);
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortD, Rhd2000EvalBoard::AuxCmd1, 0);
 
-    if (board->boardType == RHD_RECORDING_CONTROLLER)
-    {
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortE, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortF, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortG, Rhd2000EvalBoard::AuxCmd3, 3);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortH, Rhd2000EvalBoard::AuxCmd3, 3);
-    }
-    
     board->evalBoard->selectAuxCommandLength(Rhd2000EvalBoard::AuxCmd1, 0, 1);
 
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortA, Rhd2000EvalBoard::AuxCmd3,
@@ -618,18 +590,6 @@ void ImpedanceMeter::restoreBoardSettings()
         board->settings.fastSettleEnabled ? 2 : 1);
     board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortD, Rhd2000EvalBoard::AuxCmd3,
         board->settings.fastSettleEnabled ? 2 : 1);
-
-    if (board->boardType == RHD_RECORDING_CONTROLLER)
-    {
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortE, Rhd2000EvalBoard::AuxCmd3,
-            board->settings.fastSettleEnabled ? 2 : 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortF, Rhd2000EvalBoard::AuxCmd3,
-            board->settings.fastSettleEnabled ? 2 : 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortG, Rhd2000EvalBoard::AuxCmd3,
-            board->settings.fastSettleEnabled ? 2 : 1);
-        board->evalBoard->selectAuxCommandBank(Rhd2000EvalBoard::PortH, Rhd2000EvalBoard::AuxCmd3,
-            board->settings.fastSettleEnabled ? 2 : 1);
-    }
 
     if (board->settings.fastTTLSettleEnabled)
     {

@@ -23,7 +23,7 @@
 
 #include "Headstage.h"
 
-using namespace RhythmNode;
+using namespace IntanUSB;
 
 Headstage::Headstage(Rhd2000EvalBoard::BoardDataSource dataSource_, int MAX_H) :
     dataSource(dataSource_),

@@ -23,13 +23,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <PluginInfo.h>
 
-#include "AcquisitionBoard.h"
 #include "IntanUSBInterface.h"
-#include "AcqBoardOutput.h"
-#include "IntanRecordController.h"
 
 #include <string>
-#ifdef WIN32
+#ifdef _WIN32
 #include <Windows.h>
 #define EXPORT __declspec(dllexport)
 #else
@@ -37,12 +34,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 using namespace Plugin;
-#define NUM_PLUGINS 3
+#define NUM_PLUGINS 1
 
 extern "C" EXPORT void getLibInfo(Plugin::LibraryInfo* info)
 {
 	info->apiVersion = PLUGIN_API_VER;
-	info->name = "Rhythm Plugins";
+	info->name = "Intan RHD USB";
 	info->libVersion = "0.2.6";
 	info->numPlugins = NUM_PLUGINS;
 }
@@ -53,25 +50,9 @@ extern "C" EXPORT int getPluginInfo(int index, Plugin::PluginInfo* info)
 	{
 	case 0:
 		info->type = Plugin::Type::DATA_THREAD;
-		info->dataThread.name = "Acquisition Board";
-		info->dataThread.creator = &createDataThread<RhythmNode::AcquisitionBoard>;
-		break;
-	case 1:
-		info->type = Plugin::Type::DATA_THREAD;
 		info->dataThread.name = "Intan RHD USB";
-		info->dataThread.creator = &createDataThread<RhythmNode::IntanUSBInterface>;
+		info->dataThread.creator = &createDataThread<IntanUSB::IntanUSBInterface>;
 		break;
-	case 2:
-		info->type = Plugin::Type::PROCESSOR;
-		info->processor.name = "Acq Board Output";
-		info->processor.type = Plugin::Processor::SINK;
-		info->processor.creator = &createProcessor<AcqBoardOutputNamespace::AcqBoardOutput>;
-		break;
-	/*case 2:
-		info->type = Plugin::Type::DATA_THREAD;
-		info->dataThread.name = "RHD Rec Controller";
-		info->dataThread.creator = &createDataThread<RhythmNode::IntanRecordController>;
-		break;*/
 	default:
 		return -1;
 		break;
