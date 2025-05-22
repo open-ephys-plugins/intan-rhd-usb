@@ -20,7 +20,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #ifndef __INTANUSB_H_2C4CBD67__
 #define __INTANUSB_H_2C4CBD67__
 
@@ -29,7 +28,7 @@
 namespace IntanUSB
 {
 
-    /**
+/**
         Communicates with the Intan RHD USB Interface Board
 
         https://intantech.com/RHD_USB_interface_board.html
@@ -37,16 +36,14 @@ namespace IntanUSB
         @see DataThread, SourceNode
         */
 
-    class IntanUSBInterface : public DeviceThread
-    {
-    public:
+class IntanUSBInterface : public DeviceThread
+{
+public:
+    IntanUSBInterface (SourceNode* sn) : DeviceThread (sn) {}
 
-        IntanUSBInterface(SourceNode* sn) : DeviceThread(sn) { }
+    ~IntanUSBInterface() {}
+};
 
-        ~IntanUSBInterface() { }
-    };
-
-}
+} // namespace IntanUSB
 
 #endif
-
