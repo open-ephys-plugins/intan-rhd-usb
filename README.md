@@ -1,4 +1,4 @@
-# Rhythm Plugins
+# Intan RHD USB
 
 ![acquisition-board-plugin-screenshot](https://open-ephys.github.io/gui-docs/_images/intanrhdusb-01.png)
 
@@ -10,7 +10,7 @@ These plugins can be added via the Open Ephys GUI's built-in Plugin Installer. P
 
 ## Usage
 
-Instructions for using the Rhythm Plugins are available [here](https://open-ephys.github.io/gui-docs/User-Manual/Plugins/Intan-RHD-USB.html).
+Instructions for using the Intan RHD USB are available [here](https://open-ephys.github.io/gui-docs/User-Manual/Plugins/Intan-RHD-USB.html).
 
 ## Building from source
 
