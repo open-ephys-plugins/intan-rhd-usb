@@ -1,32 +1,22 @@
 # Rhythm Plugins
 
-![acquisition-board-plugin-screenshot](Resources/acquisition-board-plugin.png)
+![acquisition-board-plugin-screenshot](https://open-ephys.github.io/gui-docs/_images/intanrhdusb-01.png)
 
-A set of plugins for streaming data from devices running Intan's Rhythm firmware. 
-
-These devices are currently supported:
-
-- [Open Ephys Acquisition Board](https://open-ephys.org/acq-board)
-- [Intan RHD USB Interface Board](https://intantech.com/RHD_USB_interface_board.html)
-
-Plugins for the following devices are coming soon:
-
-- [Intan 512 and 1024 Recording Controllers](https://intantech.com/RHD_controllers.html)
-- [Intan RHS Recording/Stimulation Controller](https://intantech.com/stim_record_controller.html)
+Streams data from an Intan RHD USB Interface Board.
 
 ## Installation
 
-These plugins can be added via the Open Ephys GUI's built-in Plugin Installer. Press **ctrl-P** or **⌘P** to open the Plugin Installer, browse to "Rhythm Plugins," and click the "Install" button. The Acquisition Board, Intan RHD USB, and Acq. Board Output plugins should now be available to use.
+These plugins can be added via the Open Ephys GUI's built-in Plugin Installer. Press **ctrl-P** or **⌘P** to open the Plugin Installer, browse to "Intan RHD USB", and click the "Install" button. The Intan RHD USB, plugin should now be available to use.
 
 ## Usage
 
-Instructions for using the Rhythm Plugins are available [here](https://open-ephys.github.io/gui-docs/User-Manual/Plugins/Rhythm-Plugins.html).
+Instructions for using the Rhythm Plugins are available [here](https://open-ephys.github.io/gui-docs/User-Manual/Plugins/Intan-RHD-USB.html).
 
 ## Building from source
 
 First, follow the instructions on [this page](https://open-ephys.github.io/gui-docs/Developer-Guide/Compiling-the-GUI.html) to build the Open Ephys GUI.
 
-**Important:** This plugin is intended for use with the latest version of the GUI (0.6.0 and higher). The GUI should be compiled from the [`main`](https://github.com/open-ephys/plugin-gui/tree/main) branch, rather than the former `master` branch.
+**Important:** This plugin is intended for use with the latest version of the GUI (v1.0.0 and higher).
 
 Then, clone this repository into a directory at the same level as the `plugin-GUI`, e.g.:
  
@@ -37,7 +27,7 @@ Code
 │   ├── Source
 │   └── ...
 ├── OEPlugins
-│   └── rhythm-plugins
+│   └── intan-rhd-usb
 │       ├── Build
 │       ├── Source
 │       └── ...
@@ -53,7 +43,7 @@ From the `Build` directory, enter:
 cmake -G "Visual Studio 17 2022" -A x64 ..
 ```
 
-Next, launch Visual Studio and open the `OE_PLUGIN_rhythm-plugins.sln` file that was just created. Select the appropriate configuration (Debug/Release) and build the solution.
+Next, launch Visual Studio and open the `OE_PLUGIN_intan-rhd-usb.sln` file that was just created. Select the appropriate configuration (Debug/Release) and build the solution.
 
 Selecting the `INSTALL` project and manually building it will copy the `.dll` and any other required files into the GUI's `plugins` directory. The next time you launch the GUI from Visual Studio, the new plugins should be available.
 
@@ -84,7 +74,7 @@ From the `Build` directory, enter:
 cmake -G "Xcode" ..
 ```
 
-Next, launch Xcode and open the `rhythm-plugins.xcodeproj` file that now lives in the “Build” directory.
+Next, launch Xcode and open the `intan-rhd-usb.xcodeproj` file that now lives in the “Build” directory.
 
 Running the `ALL_BUILD` scheme will compile the plugin; running the `INSTALL` scheme will install the `.bundle` file to `/Users/<username>/Library/Application Support/open-ephys/plugins-api`. The new plugins should be available the next time you launch the GUI from Xcode.
 
