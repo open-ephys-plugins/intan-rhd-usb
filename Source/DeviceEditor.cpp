@@ -46,7 +46,7 @@ DeviceEditor::DeviceEditor (GenericProcessor* parentNode,
     canvas = nullptr;
     noBoardsDetectedLabel = nullptr;
 
-    if (board == nullptr)
+    if (! board->foundInputSource())
     {
         noBoardsDetectedLabel = std::make_unique<Label> ("NoBoardsDetected", "No RHD USB Board Detected.");
         noBoardsDetectedLabel->setBounds (0, 15, desiredWidth, 125);
